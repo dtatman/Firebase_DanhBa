@@ -32,7 +32,6 @@ class AddContactActivity : AppCompatActivity() {
         buttonSave = findViewById(R.id.buttonSave)
 
         // Lắng nghe sự kiện click vào nút Lưu
-
         buttonSave.setOnClickListener {
             val name = editTextName.text.toString().trim()
             val phone = editTextPhone.text.toString().trim()
@@ -41,12 +40,15 @@ class AddContactActivity : AppCompatActivity() {
 
             // Kiểm tra đầu vào
             if (validateInput(name, phone, email, address)) {
-                // Lưu thông tin liên hệ vào Firebase
+                // Nếu đầu vào hợp lệ, gọi hàm lưu liên hệ vào Firebase
                 saveContact(name, phone, email, address)
             }
         }
     }
 
+
+
+    // Hàm kiểm tra đầu vào
     private fun validateInput(name: String, phone: String, email: String, address: String): Boolean {
         // Kiểm tra tên không được để trống
         if (name.isEmpty()) {
@@ -83,9 +85,15 @@ class AddContactActivity : AppCompatActivity() {
 
     // Hàm lưu liên hệ vào Firebase
     private fun saveContact(name: String, phone: String, email: String, address: String) {
+        // Kiểm tra nếu bất kỳ tham số nào là null, thay thế bằng giá trị mặc định hoặc giá trị an toàn
+        val safeName = name ?: ""
+        val safePhone = phone ?: ""
+        val safeEmail = email ?: ""
+        val safeAddress = address ?: ""
+
         // Tạo đối tượng liên hệ mới
         val contactId = FirebaseDatabase.getInstance().reference.push().key // Tạo ID ngẫu nhiên
-        val contact = contactId?.let { Contact(it, name, phone, email, address) }
+        val contact = contactId?.let { Contact( safeName, safePhone, safeEmail, safeAddress,it) }
 
         // Lưu vào Firebase Realtime Database
         if (contactId != null) {

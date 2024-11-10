@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.database.*
 
 class ContactDetailActivity : AppCompatActivity() {
-
+    private  lateinit var id: String
     private lateinit var nameEditText: EditText
     private lateinit var phoneEditText: EditText
     private lateinit var emailEditText: EditText
@@ -40,6 +40,7 @@ class ContactDetailActivity : AppCompatActivity() {
         contactId = intent.getStringExtra("CONTACT_ID")!!
 
         // Pre-fill data into the EditText fields
+        id= contact.id
         nameEditText.setText(contact.name)
         phoneEditText.setText(contact.phone)
         emailEditText.setText(contact.email)
@@ -54,6 +55,7 @@ class ContactDetailActivity : AppCompatActivity() {
         deleteButton.setOnClickListener {
             deleteContactFromFirebase()
         }
+
     }
 
     private fun updateContactInFirebase() {
@@ -61,7 +63,8 @@ class ContactDetailActivity : AppCompatActivity() {
             nameEditText.text.toString(),
             phoneEditText.text.toString(),
             emailEditText.text.toString(),
-            addressEditText.text.toString()
+            addressEditText.text.toString(),
+            id
         )
 
         firebaseDatabase.child(contactId).setValue(updatedContact)

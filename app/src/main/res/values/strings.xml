@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">FireBase_DanhBa</string>
+
+    <!-- Chuỗi tiêu đề cho MainActivity -->
+    <string name="title_activity_main">Danh Bạ</string>
+
+    <!-- Các chuỗi khác có thể dùng trong ứng dụng -->
+    <string name="search_hint">Tìm kiếm liên hệ...</string>
+    <string name="add_contact">Thêm liên hệ</string>
+    <string name="contact_name">Tên liên hệ</string>
+    <string name="contact_phone">Số điện thoại</string>
+    <string name="contact_email">Email</string>
+    <string name="contact_address">Địa chỉ</string>
+    <string name="save_contact">Lưu liên hệ</string>
+    <string name="delete_contact">Xóa liên hệ</string>
+</resources>
